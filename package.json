@@ -1,0 +1,32 @@
+{
+  "name": "wed_bansach",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --inspect src/main.js",
+    "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thien101/bansach.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thien101/bansach/issues"
+  },
+  "homepage": "https://github.com/thien101/bansach#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.9.0",
+    "mongoose-delete": "^0.5.4"
+  },
+  "devDependencies": {
+    "node-sass": "^8.0.0",
+    "nodemon": "^2.0.20"
+  }
+}

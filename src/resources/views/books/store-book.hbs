@@ -1,0 +1,83 @@
+<div class="container-table" style="min-height: 576px; padding: 0px 20px; ">
+    <div>
+        <h3 class="text center">Khóa học của tôi</h3>
+        <a href="/book/trash">Thùng Rác</a>
+    </div>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên Sách</th>
+                <th scope="col">Tên tác giả</th>
+                <th scope="col">Loại</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.category}}</td>
+                <td>
+                    <a class="btn btn-link" href="/courses/{{this._id}}/edit">Sua</a>
+                    <a class="btn btn-link" href="" data-toggle="modal" data-target="#delete-book-modal"  data-id="{{this._id}}">Xoa</a>
+                </td>
+
+            </tr>
+            {{else}}
+            <tr>
+              <td class="text-center" colspan="5">Bạn chưa đăng khóa học nào.
+                 <a href="/book/create">Đăng khóa học tại đây!</a>
+              <td>
+            </tr>
+            {{/each }}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="delete-book-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="btn-delete-book">Xóa</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-form" method="POST"></form>
+
+<script>
+    var idBook;
+    var deleteform = document.forms['delete-form'];
+    var btnDeleteBook = document.getElementById('btn-delete-book');
+
+    //khi tải content
+    document.addEventListener('DOMContentLoaded', function (){
+        //Khi click vào Xóa courser
+        $('#delete-book-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            idBook = button.data('id') // Extract info from data-* attributes 
+            console.log(idBook)
+        })  
+    })
+
+    btnDeleteBook.onclick = function () {
+        deleteform.action = '/book/' + idBook + '?_method=DELETE';
+        deleteform.submit();
+    }
+    
+</script>

@@ -1,0 +1,96 @@
+<div class="container-table" style="min-height: 576px; padding: 0px 20px;">
+    <div>
+        <h3 class="">Sách đã xóa</h3>
+        <a href="/book/store">Quay Lại</a>
+    </div>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên Sách</th>
+                <th scope="col">Tên tác giả</th>
+                <th scope="col">Thể Loại</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{#each books}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.category}}</td>
+                <td>
+                    <a class="btn btn-link btn-restore" data-id="{{this._id}}" href="">Khôi phục</a>
+                    <a class="btn btn-link" href="" data-toggle="modal" data-target="#delete-course-modal"  data-id="{{this._id}}">
+                      Xoa vĩnh viễn
+                    </a>
+                </td>
+
+            </tr>   
+            {{else}}
+            <tr>
+              <td class="text-center" colspan="5">Thùng rác rỗng.
+                 <a href="/book/store">Danh sách Sách</a>
+              <td>
+            </tr>
+            {{/each }}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" id="delete-course-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa sach vĩnh viễn ?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Dữ liệu sẽ không khôi phục nến bạn xóa!</p>
+        <p>Bạn có chắc chắn muốn xóa</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-book" class="btn btn-danger">Xóa vĩnh viễn</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-book-form" method="POST"></form>
+<form name="restore-book-form" method="POST"></form>
+
+
+<script>
+    //khi tải content
+    document.addEventListener('DOMContentLoaded', function (){
+        var idCourse;
+        var deleteForm = document.forms['delete-book-form'];
+        var restoreForm = document.forms['restore-book-form'];
+
+        var btnDeleteBook = document.getElementById('btn-delete-book');
+        var restoreBtn = $('.btn-restore');
+
+        //Khi click vào Xóa courser
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Lấy đúng mục tiêu mà con trỏ click vào
+            idCourse = button.data('id') // Lấy thông tin trường data-.. của mục tiêu
+            //console.log(button)
+        })
+
+        btnDeleteBook.onclick = function () {
+            deleteForm.action = '/book/' + idCourse + '/force?_method=DELETE';
+            deleteForm.submit();
+        }
+
+        restoreBtn.click(function(e){
+            e.preventDefault();
+            restoreForm.action = '/book/' + $(this).data('id')+ '/restore?_method=PATCH';
+            restoreForm.submit();
+        })
+    })
+</script>

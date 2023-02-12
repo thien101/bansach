@@ -1,0 +1,33 @@
+<div class='m-4' style="min-height: 526px;">
+    <h3>Thêm Sách</h3>
+    <form action='/book/addbook' method='POST'>
+        <div class='form-group'>
+            <label for='name'>Name</label>
+            <input type='text' class='form-control' id='name' name='name' />
+        </div>
+        <div class='form-group'>
+            <label for='description'>Author</label>
+            <input
+                type='text'
+                class='form-control'
+                id='author'
+                name='author'
+            />
+        </div>
+        <div class='form-group'>
+            <label for='image'>Category</label>
+            <input type='text' class='form-control' id='category' name='category' />
+
+        </div>
+        <div class='form-group'>
+            <label for='videoid'>Image link</label>
+            <input
+                type='text'
+                class='form-control'
+                id='img'
+                name='img'
+            />
+        </div>
+        <button type='submit' class='btn btn-primary'>Thêm</button>
+    </form>
+</div>

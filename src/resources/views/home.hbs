@@ -1,0 +1,17 @@
+<div class="mt-4 book-item" style="min-height: 550px;">
+  <div class="row container-books">
+        {{#each books}}
+            <div class="col-sm-6 col-lg-4"  style="width: 18rem;">
+                <div class="card card-book-item" style="width: 18rem;">
+                    <center><img class="card-img-top book-image" src="{{this.image}}" alt="{{this.name}}"></center>
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.author}}</p>
+                        {{!-- <a href="#" class="btn btn-primary">Mua Khoa Hoc</a> --}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    
+</div>
